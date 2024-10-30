@@ -1,0 +1,22 @@
+import org.junit.*;
+
+public class TestCommands {
+    @Test
+    public void test() {
+        Greet gre = new Greet();
+        Assert.assertEquals("Hello", gre.says());
+    }
+
+    @Test
+    public void testPwd() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        Assert.assertEquals("E:\\java project\\junit-test", cli.pwd());
+
+    }
+    @Test
+    public void testExit() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        Assert.assertEquals("Exiting CLI.", cli.exit());
+
+    }
+}
