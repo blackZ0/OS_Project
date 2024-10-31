@@ -1,0 +1,80 @@
+@Test
+    public void cdTest() {
+        CLI cli = new CLI();
+        assertEquals("/Users",cli.cd("/Users"));
+
+
+    }
+    @Test
+    public void rmdirTest(){
+
+        CLI cli = new CLI();
+        String path = System.getProperty("user.dir");
+        String filename = "idktext.txt";
+        File f = new File(path+filename);
+
+        if(f.exists() && f.isDirectory() && Objects.requireNonNull(f.list()).length==0)
+            assertTrue(cli.rmdir("idkkkkkk"));
+        else  assertFalse(cli.rmdir("idkkkkkk"));
+    }
+
+    @Test
+    public void greaterThanTest(){
+
+        CLI cli = new CLI();
+        assertEquals(cli.pwd(),cli.greater_than("pwd","text.txt"));
+    }
+    @Test
+    public void doubleGreaterThanTest(){
+        CLI cli = new CLI();
+
+        String path = System.getProperty("user.dir");
+        String filename = "idktext.txt";
+        File f = new File(path+filename);
+
+        if(f.exists()) assertTrue(cli.double_greater_than("pwd","idktext.txt"));
+        else  assertFalse(cli.double_greater_than("pwd","idktext.txt"));
+    }
+
+    @Test
+    public void touchTest(){
+        CLI cli = new CLI();
+        String path = System.getProperty("user.dir");
+        File f = new File(path+"/"+"hello.txt");
+        if(f.exists())  assertEquals(cli.pwd(), cli.touch("hello.txt"));
+        else   assertEquals(cli.pwd() + "/" + "hello.txt", cli.touch("hello.txt"));
+    }
+
+    @Test
+    public void mvTest(){
+        CLI cli = new CLI();
+        String path = System.getProperty("user.dir");
+        File f = new File(path+"/"+"hello.txt");
+        if(f.exists())  assertEquals(cli.pwd(), cli.touch("hello.txt"));
+        else   assertEquals(cli.pwd() + "/" + "hello.txt", cli.touch("hello.txt"));
+    }
+    @Test
+    public void catTest() throws IOException {
+        CLI cli = new CLI();
+        String path = System.getProperty("user.dir");
+        File f = new File(path+"/"+"hello.txt");
+        File f2 = new File(path+"/"+"hi.txt");
+
+        ArrayList<String> catRequirments = new ArrayList<String>();
+        catRequirments.add("hello.txt");
+        catRequirments.add("hi.txt");
+
+        assertEquals(f2,cli.cat(catRequirments));
+
+    }
+    public void rmTest(){
+
+        CLI cli = new CLI();
+        String path = System.getProperty("user.dir");
+        String filename = "idktext.txt";
+        File f = new File(path+filename);
+
+        if(f.exists() && f.isDirectory() && Objects.requireNonNull(f.list()).length==0)
+            assertTrue(cli.rm("idkkkkkk"));
+        else  assertFalse(cli.rm("idkkkkkk"));
+    }
