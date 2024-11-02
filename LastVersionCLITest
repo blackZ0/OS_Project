@@ -1,0 +1,129 @@
+import org.junit.*;
+
+import static org.junit.Assert.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class TestCommands {
+    
+    @Test
+    public void testPwd() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        Assert.assertEquals("C:\\Users\\Laptop\\Desktop\\New folder", cli.pwd());
+
+    }
+     @Test
+    public void cdTest() {
+    CommandLineInterpreter cli = new CommandLineInterpreter();
+    assertEquals("/Users", cli.cd("/Users"));
+
+}
+
+    @Test
+    public void testLs() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        String output = cli.ls();
+        assertNotNull("ls should return non-null output", output);
+    }
+
+    @Test
+    public void testLs_a() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        String output = cli.ls_a();
+        assertTrue("ls -a should list all files including hidden", output.contains("."));
+    }
+
+    @Test
+    public void testLs_r() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        String output = cli.ls_r();
+        assertNotNull("ls -r should return non-null output", output);
+    }
+
+    @Test
+    public void testMkdir() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        String newDirName = "testDir";
+        File testDir = new File(cli.currentPath + "/" + newDirName);
+        // Clean up any pre-existing directory
+        if (testDir.exists()) {
+            testDir.delete();
+        }
+        // Test directory creation
+        boolean created = cli.mkdir(newDirName);
+        assertTrue("mkdir should return true if the directory is created", created);
+        assertTrue("Directory should exist after mkdir command", testDir.exists());
+        // Cleanup after test
+        testDir.delete();
+    }
+    @Test
+    public void rmdirTest() {
+
+    CommandLineInterpreter cli = new CommandLineInterpreter();
+    String path = System.getProperty("user.dir");
+    String filename = "idktext.txt";
+    File f = new File(path + filename);
+
+    if (f.exists() && f.isDirectory() && Objects.requireNonNull(f.list()).length == 0)
+        assertTrue(cli.rmdir("idkkkkkk"));
+    else
+        assertFalse(cli.rmdir("idkkkkkk"));
+    }
+    
+    @Test
+    public void touchTest() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        String path = System.getProperty("user.dir");
+        File f = new File(path + "/" + "hello.txt");
+        if (f.exists())
+            assertEquals(cli.pwd(), cli.touch("hello.txt"));
+        else
+            assertEquals(cli.pwd() + "/" + "hello.txt", cli.touch("hello.txt"));
+    }
+
+    @Test
+    public void mvTest() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        String path = System.getProperty("user.dir");
+        File f = new File(path + "/" + "hello.txt");
+        if (f.exists())
+            assertEquals(cli.pwd(), cli.touch("hello.txt"));
+        else
+            assertEquals(cli.pwd() + "/" + "hello.txt", cli.touch("hello.txt"));
+    }
+    
+    public void rmTest() {
+
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        String path = System.getProperty("user.dir");
+        String filename = "idktext.txt";
+        File f = new File(path + filename);
+
+        if (f.exists() && f.isDirectory() && Objects.requireNonNull(f.list()).length == 0)
+            assertTrue(cli.rm("idkkkkkk"));
+        else
+            assertFalse(cli.rm("idkkkkkk"));
+    }
+    @Test
+    public void catTest() throws IOException {
+    CommandLineInterpreter cli = new CommandLineInterpreter();
+    String path = System.getProperty("user.dir");
+    File f = new File(path + "/" + "hello.txt");
+    File f2 = new File(path + "/" + "hi.txt");
+
+    ArrayList<String> catRequirments = new ArrayList<String>();
+    catRequirments.add("hello.txt");
+    catRequirments.add("hi.txt");
+
+    assertEquals(f2, cli.cat(catRequirments));
+    }
+    @Test
+    public void testExit() {
+        CommandLineInterpreter cli = new CommandLineInterpreter();
+        Assert.assertEquals("Exiting CLI.", cli.exit());
+
+    }
+}
