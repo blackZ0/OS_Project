@@ -78,7 +78,8 @@ class CommandLineInterpreter {
 
                 switch (command) {
                     case "pwd":
-
+                        pwd();
+                        break;
                     case "ls":
                         ls();
                         break;
@@ -133,7 +134,8 @@ class CommandLineInterpreter {
     }
     
     public String pwd() {
-        String currentPath = "" + Paths.get("").toAbsolutePath();
+        String basePath = "C:\\Users\\Labptop\\Desktop\\20210176_20200621_20220153_20210875IT1;
+        String currentPath = Paths.get(basePath).toAbsolutePath().toString();
         System.out.println("Current Directory: " + currentPath);
         return currentPath;
     }
