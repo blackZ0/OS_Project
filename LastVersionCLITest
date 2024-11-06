@@ -12,7 +12,7 @@ public class TestCommands {
     @Test
     public void testPwd() {
         CommandLineInterpreter cli = new CommandLineInterpreter();
-        Assert.assertEquals("C:\\Users\\Laptop\\Desktop\\New folder", cli.pwd());
+        Assert.assertEquals("C:\\Users\\Laptop\\Desktop\\20210176_20200621_20220153_20210875_IT1", cli.pwd());
 
     }
      @Test
